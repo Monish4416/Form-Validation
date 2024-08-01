@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+
+      body{
+        background: url(https://css-tricks.com/wp-content/uploads/2020/04/alpinejs.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+        .form-box {
+    max-width: 300px;
+    background: #f1f7fe;
+    overflow: hidden;
+    border-radius: 16px;
+    color: #010101;
+    border: 1px solid;
+ 
+    padding: 0px 20px 0px 20px;
+    box-shadow: 2px 10px 20px black;
+  }
+  
+  .form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px 24px;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  /*Form text*/
+   .title {
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  /*Inputs box*/
+  .form-container {
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fff;
+    margin: 1rem 0 .5rem;
+    width: 100%;
+  }
+  
+  .input {
+    height: 40px;
+    width: 220px;
+    border: 1px solid #bcbaba84;
+    border-radius: 20px;
+    font-size: .9rem;
+    padding: 8px 15px;
+  }
+  
+  .form-section {
+    padding: 16px;
+    font-size: .85rem;
+    background-color: #e0ecfb;
+    box-shadow: rgb(0 0 0 / 8%) 0 -1px;
+  }
+  
+  .form-section a {
+    font-weight: bold;
+    color: #0066ff;
+    transition: color .3s ease;
+  }
+  
+  .form-section a:hover {
+    color: #005ce6;
+    text-decoration: underline;
+  }
+  
+  /*Button*/
+  .form .button {
+    background-color: #0066ff;
+    color: #fff;
+    border: 0;
+    border-radius: 24px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .3s ease;
+  }
+  
+  .form .button:hover {
+    background-color: #005ce6;
+  }
+  div span{
+    color: red;
+  }
+  .row{
+    display: flex;
+    justify-content: space-evenly;
+
+    flex-wrap: wrap;
+  }
+  .col{
+    border: 2px solid;
+    box-shadow: 2px 8px 20px black;
+    border-radius: 15px;
+   
+   
+  }
+ 
+  .col table th{
+    border: 2px solid;
+    text-align: center;
+    color: #010101a8;
+  }
+  .col td{
+    border: 2px solid;
+    padding: 5px 15px;
+    text-align: center;
+    color: #666;
+  }
+  .col th{
+    padding: 5px 15px;
+  }
+  .data{
+    background-color: white;
+  }
+  .heading{
+    text-align: center;
+    font-size: 70px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #e0ecfb;
+    margin-top: 20px;
+  }
+
+    </style>
+</head>
+<body style="font-family: Arial, Helvetica, sans-serif;"> 
+  <h1 class="heading"><span style="color: red;">Form</span> Valid<span style="color: black;">ation</span></h1>
+    <div class="row">
+    <div class="form-box" >
+        <form class="form" onsubmit="event.preventDefault();validateform()">
+            <span class="title">Sign up</span>
+            <span class="subtitle">Create a free account with your email.</span>
+           <div class="form-container">
+                <input type="text" class="input" placeholder="Full Name" id="name" autocomplete="off"><br>
+                <b><span id="fname"></span></b>
+        
+                    <input type="email" class="input" placeholder="Email" id="email" autocomplete="off" required><br>
+                    <b><span id="femail"></span></b>
+           
+                    <input type="password" class="input" placeholder="Password" id="pass" autocomplete="off"><br>
+                   <b><span id="fpass"></span></b>
+          
+                    <input type="password" class="input" placeholder="Confirm Password" id="cpass" autocomplete="off"><br>
+                    <b><span id="fcpass"></span></b>
+            
+                    <input type="number" class="input" placeholder="Mobile no." id="phone" autocomplete="off" ><br>
+                   <b><span id="fphone"></span></b>
+           
+                </div>
+            <input type="submit" class="button" value="Submit Data" onclick="submitdata()">
+            <input type="reset" class="button">
+        </form>
+    
+        </div>
+
+        <div class="col data">
+          <table id="table">
+            <h1 style="text-align: center;">Form Data</h1>
+            <thead>
+
+              <tr>
+              <th>Full-name</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Mobile no.</th>
+            </tr>
+          </thead>
+    
+          </table>
+        </div>
+    </div>
+ 
+
+        <script>
+            function validateform(){
+
+    var a = document.getElementById('name').value;
+    var b = document.getElementById('email').value;
+    var c = document.getElementById('pass').value;
+    var d = document.getElementById('cpass').value;
+    var e = document.getElementById('phone').value;
+
+    var a1 = (document.getElementById('fname').innerHTML=" ");
+    var b1 = (document.getElementById('femail').innerHTML=" ");
+    var c1 = (document.getElementById('fpass').innerHTML=" ");
+    var d1 = (document.getElementById('fcpass').innerHTML=" ");
+    var e1 = (document.getElementById('fphone').innerHTML=" ");
+ 
+    if(a==""){
+        document.getElementById('fname').innerHTML="*Full-name must be filled out!";
+         return false;
+    }
+    if(!isNaN(a)){
+        document.getElementById('fname').innerHTML="*Only character are allowed!";
+        return false;
+    }
+    if((a.length<=4) || (a.length>20)){
+        document.getElementById('fname').innerHTML="*Full-name length must be between 4 to 20 !";
+        return false;
+    }
+
+    // if(b == ""){
+    //     document.getElementById('femail').innerHTML="*Please fill your email!";
+    //     return false;
+    // }  
+    // if(b.indexOf('@') <=0){
+    //     document.getElementById('femail').innerHTML="*Invalid position!"
+    //     return false;
+    // }
+
+    if (c==""){
+      document.getElementById('fpass').innerHTML="*Please fill your password!";
+      return false;
+    }
+    if ((c.length<=5) || (c.length>10)){
+      document.getElementById('fpass').innerHTML="*Password length must be between 5 to 10!";
+      return false;
+    }
+    if (d==""){
+      document.getElementById('fcpass').innerHTML="*Please confirm field!";
+      return false;
+    }
+    if(c != d){
+      document.getElementById('fcpass').innerHTML="*Password are not match!";
+      return false;
+    }
+    if(e == ""){
+      document.getElementById('fphone').innerHTML="*Please fill your number!";
+      return false;
+    }
+    if(e.length != 10){
+      document.getElementById('fphone').innerHTML="*Mobile number must be 10 digits only!";
+      return false;
+    }  
+}
+
+
+function submitdata(){
+
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const pass = document.getElementById('pass').value;
+  const phone = document.getElementById('phone').value;
+
+  const tableElement = document.getElementById('table');
+  const trElement = document.createElement('tr');
+  const tbodyElement = document.createElement('tbody');
+  const nameElement = document.createElement('td');
+  const emailElement = document.createElement('td');
+  const passElement = document.createElement('td');
+  const phoneElement = document.createElement('td');
+  
+  nameElement.innerHTML = name;
+  emailElement.innerHTML = email;
+  passElement.innerHTML = pass;
+  phoneElement.innerHTML = phone;
+  
+  
+  trElement.appendChild(nameElement);
+  trElement.appendChild(emailElement);
+  trElement.appendChild(passElement);
+  trElement.appendChild(phoneElement);
+  
+
+  tbodyElement.appendChild(trElement);
+  
+  tableElement.appendChild(tbodyElement);
+ 
+ 
+}
+</script>
+</body>
+</html>
